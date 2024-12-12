@@ -2,422 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Responsive Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
+        .contact-icon {
+          background-color: #f0f0f0;
+          border-radius: 50%;
+          padding: 20px;
+          width: 80px;
+          height: 80px;
+          margin-bottom: 10px;
         }
-
-        body {
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
+      
+        .contact-icon img {
+          width: 50px;
+          height: 50px;
         }
-
-        /* Light and Dark Mode Colors */
-        :root {
-            --primary-bg: #ffffff;
-            --primary-text: #000000;
-            --secondary-bg: #f0f0f0;
-            --accent-color: #5bb3f2;
+      
+        .contact a {
+          text-decoration: none;
+          color: #000;
         }
-
-        [data-theme="dark"] {
-            --primary-bg: #000000;
-            --primary-text: #00ff7f;
-            --secondary-bg: #333333;
-            --accent-color: #00ff7f;
+      
+        .contact p {
+          font-size: 12px;
         }
-
-        body {
-            background-color: var(--primary-bg);
-            color: var(--primary-text);
+      
+        .contact .col-2 {
+          margin-bottom: 20px;
         }
-
-        a {
-            text-decoration: none;
-            color: var(--accent-color);
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 90px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            background: var(--primary-bg);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        nav .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary-text);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent-color);
-        }
-
-        .theme-toggle {
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: var(--primary-text);
-            margin-right: 1px;
-        }
-
-        /* Sidebar Navigation for small screens */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform: scale(0);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-
-        .sidebar.open {
-            transform: scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin: 20px 0;
-        }
-
-        .sidebar ul li a {
-            font-size: 2rem;
-            color: var(--primary-text);
-            transition: color 0.3s;
-        }
-
-        .sidebar ul li a:hover {
-            color: var(--accent-color);
-        }
-
-
-        /* Hero Section */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: url('https://th.bing.com/th/id/OIP.KAz8M7ZezYPTGyUkBGJjtAHaE7?w=242&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7') no-repeat center/cover;
-            padding: 20px;
-        }
-        
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            width: 90%;
-            max-width: 1200px;
-            flex-direction: row; /* Default for larger screens */
-        }
-
-        /* Image */
-        .owner img {
-            width: 230px;
-            height: 230px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--accent-color);
-        }
-        
-        /* Hero Text */
-        .hero-text {
-            color: white;
-            text-align: left;
-        }
-        
-        .hero-text h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-        
-        .hero-text p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        
-        .hero-text .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .hero-text .social-icons a {
-            font-size: 1.5rem;
-            color: white;
-            transition: transform 0.3s;
-        }
-        
-        .hero-text .social-icons a:hover {
-            transform: scale(1.2);
-        }
-
-        /* Responsive Adjustments */
+      
+        /* Ensure responsiveness */
         @media (max-width: 768px) {
-            .hero-content {
-                flex-direction: column; /* Stack elements vertically */
-                justify-content: flex-start;
-                text-align: center;
-            }
-            
-            .hero-text {
-                margin-top: 20px;
-            }
-
-            .owner img {
-                margin-top: 20px;
-            }
+          .contact .col-2 {
+            margin-bottom: 10px;
+          }
         }
-
-        /* Sections */
-        section {
-            padding: 100px 20px;
-            text-align: center;
-        }
-
-        .about, .skills, .portfolio, .contact {
-            min-height: 100vh;
-        }
-        .about{
-            background: var(--secondary-bg);
-        }
-
-        .skills ul {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            list-style: none;
-            margin-top: 20px;
-        }
-
-        .skills ul li {
-            background: var(--secondary-bg);
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-
-        .portfolio .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .portfolio .projects div {
-            background: var(--secondary-bg);
-            padding: 20px;
-            border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .portfolio .projects div:hover {
-            transform: translateY(-5px);
-        }
-
-        form input, form textarea, form button {
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid var(--accent-color);
-            border-radius: 5px;
-            background: var(--secondary-bg);
-            color: var(--primary-text);
-        }
-
-        form button {
-            background: var(--accent-color);
-            color: var(--primary-bg);
-            font-weight: bold;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: var(--secondary-bg);
-        }
-
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            pointer-events: all;
-        }
-        .menu-toggle{
-            display: none;
-        }
-
-         /* Responsive Adjustments */
-         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: block;
-                font-size: 2rem;
-                color: var(--primary-text);
-                cursor: pointer;
-            }
-        }
-
-        /* Code Block Styling */
-pre {
-    background-color: #2d2d2d;
-    color: #f8f8f2;
-    padding: 20px;
-    border-radius: 8px;
-    font-family: 'Courier New', Courier, monospace;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    margin: 0 auto;
-    max-width: 100%;
-    font-size: 1rem;
-
-}
-
-code {
-    color: #f8f8f2;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .about {
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 1.8rem;
-    }
-
-    p {
-        font-size: 1rem;
-    }
-
-    pre {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .about {
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 1.6rem;
-    }
-
-    p {
-        font-size: 0.9rem;
-    }
-
-    pre {
-        font-size: 0.8rem;
-        padding: 10px;
-    }
-}
-.yellow{
-    color: yellow;
-}
-.blue{
-    color: blue;
-}
-.grey{
-    color: grey;
-}
-.green{
-    color: #00ff7f;
-}
-.more-green{
-    color: #00ff1e;
-}
-.red{
-    color: red;
-}
-    </style>
+      </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">OWANA</div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+<!-- Navigation -->
+<nav>
+    <div class="logo">CANOL</div>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
 
+    <!-- Theme Toggle Icon and Menu Toggle Icon -->
+    <div class="nav-icons" id="theme">
         <i class="fas fa-sun theme-toggle"></i>
         <i class="fas fa-bars menu-toggle"></i>
-    </nav>
+    </div>
+</nav>
 
-    <!-- Sidebar for small screens -->
+<!-- Sidebar for small screens -->
 <div class="sidebar" id="sidebar">
     <ul>
         <li><a href="#about" class="menu-item">About</a></li>
@@ -426,6 +71,7 @@ code {
         <li><a href="#contact" class="menu-item">Contact</a></li>
     </ul>
 </div>
+
 
 <!-- Hero Section -->
 <section class="hero">
@@ -446,82 +92,262 @@ code {
 </section>
 
 
-    <!-- About Section -->
-<section id="about" class="about">
-    <h1>About Me</h1>
-    <pre>
-    About />
-    <span class="blue">class </span><span class="yellow">canolOkothOwana </span>{
-    <span class="grey">// I can, because I did.
-        // My vast variety of skills is continuously expanding. </span>
+ <!-- About Section -->
+<section id="about" class="about-section py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="mb-4">About Me</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <!-- Add Image -->
+          <img src="public.png" alt="About Me Image" class="img-fluid rounded-circle mb-4" style="border: 2px solid black">
+        </div>
+        <div class="col-md-8">
+          <p>Hello! I am a passionate blogger and developer dedicated to sharing knowledge and creating meaningful content. My journey in web development and blogging started with a simple idea: to inspire and educate others. When I’m not coding or writing, I enjoy photography and exploring new ideas.</p>
+          <p>Feel free to connect with me and explore my work!</p>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-primary mt-3">Contact Me</a>
+    </div>
+  </section>
 
-        <span class="blue">constructor </span>() <span class="green">
-            {
-                <span class="red">this</span>.name = 'Canol Owana'
-                <span class="red">this</span>.dayOfBirthTimestamp = 03062004
-                <span class="red">this</span>.email = 'canolowana6@gmail.com'
-            }
-        </span>
+  <hr />
+  
+
+
+  <section id="skills" class="skills">
+    <h1>My Skills</h1>
+  
+    <!-- Progress bars for each skill -->
+    <div class="mb-3">
+      <label for="html" class="form-label">HTML</label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="css" class="form-label">CSS</label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="javascript" class="form-label">JavaScript</label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="react" class="form-label">React</label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="nodejs" class="form-label">Node.js</label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="php" class="form-label">PHP</label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="sql" class="form-label">SQL</label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+      </div>
+    </div>
+  
+  </section>
+  
+
+    <hr />
+
+    <section id="portfolio" class="py-5">
+        <div class="container">
+          <h2 class="text-center mb-4">Portfolio</h2>
+          
+          <div class="row g-4">
+
+            <!-- Card 1 -->
+<div class="col-md-4">
+    <div class="card h-100" style="width: 22rem;">
+      <img src="https://th.bing.com/th/id/OIP.hIIuXw4r966f8aVo4_xpCgHaE6?w=262&h=180&c=7&r=0&o=5&dpr=1.4&pid=1.7" class="card-img-top" alt="Card image 1">
+      <div class="card-body">
+        <h4 class="card-title">KEJANI RENTALS MANAGEMENT</h4>
+        <p class="card-text">This project is about a rental management plan that helps facilitate the landlord-tenant services.</p>
         
-        <span class="yellow">workExperience</span>() {
-            <span class="blue">return </span><span class="more-green">[
-                { '2020-now' : 'Full-stack Developer/Owner at Pixel Lab' },
-                { '2023-now' : 'Solutions Architect at Digitree Group S.A.' },
-                { '2017-2023' : 'Full-stack Developer at Digitree Group S.A.' },
-                { '2013-2017': 'Full-Stack Designer at Digitree Group S.A.' },
-                { '2006-now' : 'Full-Stack Designer/developer at Yasio.dev' }
-            ]</span>
-        }
+        <!-- Technologies used in the project as badges -->
+        <div style="margin-bottom: 15px;">
+          <span class="badge bg-primary">PHP</span>
+          <span class="badge bg-secondary">HTML</span>
+          <span class="badge bg-success">CSS</span>
+          <!-- Add any other technologies you're using here -->
+        </div>
+        
+        <a href="view.html" class="btn btn-primary">Read more</a>
+      </div>
+    </div>
+  </div>
+  
 
-        <span class="blue">education </span>() {
-            return [
-                { '2012-2014': 'Wyższa Szkoła Biznesu w Dąbrowie Górniczej - Master\'s Degree (mgr), Computer Science (IT)' },
-                { '2008-2012': 'Wyższa Szkoła Technologii Informatycznych w Katowicach - Bachelor of Engineering (inż.), Computer Science (IT)' }
-            ]
-        }
+            <!-- Card 2 -->
+            <div class="col-md-4">
+                <div class="card h-100" style="width: 22rem;">
+                <img src="https://th.bing.com/th/id/OIF.9Iln0PDZLzfNfhEX3JcxYA?w=229&h=183&c=7&r=0&o=5&dpr=1.4&pid=1.7" class="card-img-top" alt="Card image 2">
+                <div class="card-body">
+                  <h4 class="card-title">SOMO MOJA</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="view.html" class="btn btn-primary">Read more</a>
+                </div>
+              </div>
+            </div>
 
-        <span class="blue">skills </span>() {
-            <span class="blue">return </span> 
-            <span class="more-green">
-                [ 'HTML/CSS/JS', 'Vue', 'Node.js', 'Redis/NATS/RabbitMQ', 'Bootstrap/Tailwind', 'Webpack/Gulp/Vite', 'SCSS/Less', 'npm/yarn/pnpm', 'Docker/k8s', 'PWA', 'SSR', 'SPA', 'GIT/CVS', 'Cordova', 'NativeScript', 'Electron', 'Web-extensions', 'Web Sockets', 'Firebase', 'RWD/W3C/ARIA/WCAG', 'XSLT/Smarty/Twig', 'PHP', 'MySQL/MongoDB/ORM', 'Wordpress', 'Photoshop', 'Illustrator', 'After Effects', 'Premiere', 'Motion design', 'UX/UI', 'DTP', 'AWS', 'GCP', 'C#', 'Unity', 'TypeScript', 'NestJS', 'Cypress', 'Jest', 'Nuxt', 'Quasar' ]
-        }
-            </span>
-    }
-    </pre>
-</section>
+            <!-- Card 3 -->
+            <div class="col-md-4">
+                <div class="card h-100" style="width: 22rem;">
+                <img src="public.png" class="card-img-top" alt="Card image 3">
+                <div class="card-body">
+                  <h5 class="card-title">Card Title 3</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
 
+          </div>
+        </div>
+      </section>
 
-    <section id="skills" class="skills">
-        <h1>My Skills</h1>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node.js</li>
-            <li>PHP</li>
-            <li>SQL</li>
-        </ul>
-    </section>
+      <hr />
+      
 
-    <section id="portfolio" class="portfolio">
-        <h1>Portfolio</h1>
-        <div class="projects">
-            <div>Project 1</div>
-            <div>Project 2</div>
-            <div>Project 3</div>
+      <section id="contact" class="contact">
+        <h1>Contact</h1>
+    
+        <!-- Contact Icons Section using Bootstrap grid system -->
+        <div class="container mt-5">
+            <div class="row">
+                <!-- WhatsApp Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fab fa-whatsapp fa-3x"></i>
+                            <p class="card-text">WhatsApp</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://wa.me/1234567890" class="btn btn-success" target="_blank">Contact</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Facebook Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fab fa-facebook fa-3x"></i>
+                            <p class="card-text">Facebook</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://facebook.com/Canolowana" class="btn btn-primary" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- LinkedIn Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fab fa-linkedin fa-3x"></i>
+                            <p class="card-text">LinkedIn</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://linkedin.com/in/owano-canol" class="btn btn-info" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row">
+                <!-- GitHub Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fab fa-github fa-3x"></i>
+                            <p class="card-text">GitHub</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://github.com/Canol001" class="btn btn-dark" target="_blank">Visit</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Email Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-envelope fa-3x"></i>
+                            <p class="card-text">Email</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="mailto:canolowana6@gmail.com" class="btn btn-danger" target="_blank">Send Email</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- SMS Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-sms fa-3x"></i>
+                            <p class="card-text">SMS</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="sms:+254790502670" class="btn btn-warning" target="_blank">Send SMS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row">
+                <!-- Phone Call Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-phone-alt fa-3x"></i>
+                            <p class="card-text">Phone</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="tel:+254790502670" class="btn btn-primary" target="_blank">Call</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Discord Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fab fa-discord fa-3x"></i>
+                            <p class="card-text">Discord</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="https://discord.com/invite/yourdiscordlink" class="btn btn-secondary" target="_blank">Join</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
-    <section id="contact" class="contact">
-        <h1>Contact</h1>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+    
 
     <footer>
         <p>&copy; 2024 My Portfolio. All rights reserved.</p>
@@ -574,6 +400,31 @@ code {
             sidebar.classList.remove('open'); // Close the sidebar
         });
     });
-    </script>
-</body>
+
+
+    // Function to apply the theme based on user's preference
+    function applyTheme() {
+        const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Add 'dark-theme' class to body if the user prefers dark mode
+        if (isDarkTheme) {
+            document.body.classList.add('dark-theme');
+        } else {
+            document.body.classList.remove('dark-theme');
+        }
+    }
+
+    // Apply theme on page load
+    applyTheme();
+
+    // Listen for changes in the user's system theme preference and update the theme
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+
+    // Optional: Theme toggle button functionality
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+        document.body.classList.toggle('dark-theme');
+    });
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
 </html>
