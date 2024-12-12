@@ -8,51 +8,41 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Responsive Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .contact-icon {
-          background-color: #f0f0f0;
-          border-radius: 50%;
-          padding: 20px;
-          width: 80px;
-          height: 80px;
-          margin-bottom: 10px;
+    <script>
+        function getGreeting() {
+            const now = new Date();
+            const hours = now.getHours();
+            if (hours < 12) {
+                return "Good morning";
+            } else if (hours < 18) {
+                return "Good afternoon";
+            } else {
+                return "Good evening";
+            }
         }
-      
-        .contact-icon img {
-          width: 50px;
-          height: 50px;
-        }
-      
-        .contact a {
-          text-decoration: none;
-          color: #000;
-        }
-      
-        .contact p {
-          font-size: 12px;
-        }
-      
-        .contact .col-2 {
-          margin-bottom: 20px;
-        }
-      
-        /* Ensure responsiveness */
-        @media (max-width: 768px) {
-          .contact .col-2 {
-            margin-bottom: 10px;
-          }
-        }
-      </style>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const greetingElement = document.getElementById("greeting");
+            greetingElement.textContent = `${getGreeting()}, I'm Canol`;
+        });
+    </script>
 </head>
 <body>
 <!-- Navigation -->
 <nav>
-    <div class="logo">CANOL</div>
+    <div class="contained">
+        <div class="blinking-indicator" title="Active"></div>
+        <div class="logo">CANOL</div>
+    </div>
     <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#contact">Contact</a></li>
+        <div  style="border:2px solid grey; border-radius:12px; min-width: 100px;">
+            <li><a href="canol-resume.pdf" class="menu-item" download>Resume</a></li>
+        </div>
+        
     </ul>
 
     <!-- Theme Toggle Icon and Menu Toggle Icon -->
@@ -69,112 +59,188 @@
         <li><a href="#skills" class="menu-item">Skills</a></li>
         <li><a href="#portfolio" class="menu-item">Portfolio</a></li>
         <li><a href="#contact" class="menu-item">Contact</a></li>
+        <li><a href="canol-resume.pdf" class="menu-item" download>Resume</a></li>
+
     </ul>
 </div>
 
 
 <!-- Hero Section -->
 <section class="hero">
-    <div class="hero-content">
-        <div class="owner">
-            <img src="public.png" alt="Owner's Picture">
-        </div>
-        <div class="hero-text">
-            <h1>Hi, i'm Canol Owana Okoth</h1>
-            <p>I'm a passionate developer creating amazing web experiences.</p>
-            <div class="social-icons">
-                <a href="https://github.com/Canol001" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-    </div>
-</section>
-
-
- <!-- About Section -->
-<section id="about" class="about-section py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="mb-4">About Me</h2>
-      <div class="row justify-content-center">
-        <div class="col-md-4">
-          <!-- Add Image -->
-          <img src="public.png" alt="About Me Image" class="img-fluid rounded-circle mb-4" style="border: 2px solid black">
-        </div>
-        <div class="col-md-8">
-          <p>Hello! I am a passionate blogger and developer dedicated to sharing knowledge and creating meaningful content. My journey in web development and blogging started with a simple idea: to inspire and educate others. When I’m not coding or writing, I enjoy photography and exploring new ideas.</p>
-          <p>Feel free to connect with me and explore my work!</p>
-        </div>
+    <div class="hero-content d-flex align-items-center justify-content-center">
+      <!-- Owner's Image Section -->
+      <div class="owner me-4">
+        <img src="public.png" alt="Owner's Picture" class="img-fluid rounded-circle shadow-lg" style="width: 200px; height: 200px;">
       </div>
-      <a href="#contact" class="btn btn-primary mt-3">Contact Me</a>
+  
+      <!-- Text Section with Badges -->
+      <div class="hero-text text-center text-light">
+        <h1 class="mb-3"><div class="greeting" id="greeting">Loading...</div></h1>
+        <p class="lead mb-4">I'm a passionate developer creating amazing tech experiences.</p>
+        <!-- Badges for Titles -->
+        <div class="d-flex justify-content-center mb-4">
+          <span class="badge bg-primary mx-2">Developer</span>
+          <span class="badge bg-success mx-2">Tech Enthusiast</span>
+          <span class="badge bg-warning text-dark mx-2">Creative Thinker</span>
+        </div>
+        
+        <!-- Social Media Icons -->
+        <!-- Social Media Icons -->
+    <div class="sociall-icons">
+        <a href="https://github.com/Canol001" target="_blank"><i class="fab fa-github fa-2x"></i></a>
+        <a href="https://linkedin.com/in/owano-canol"><i class="fab fa-linkedin fa-2x"></i></a>
+        <a href="https://medium.com/@canol001"><i class="fab fa-medium fa-2x"></i></a>
+    </div>
+  
+      </div>
     </div>
   </section>
+  
+
+
+<!-- About Section -->
+<section id="about" class="about-section py-5">
+    <div class="container text-center">
+      <h2 class="mb-5">About Me</h2>
+      <div class="row align-items-center">
+        <!-- Image Section -->
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="about-image">
+            <img src="public.png" alt="About Me Image" class="img-fluid rounded-circle shadow-lg" style="border: 5px solid #007bff;">
+          </div>
+        </div>
+
+
+        <!-- Text Section -->
+        <div class="col-lg-6">
+          <h3 class="mb-4">Hi, I'm Owano Canol</h3>
+          <p class="lead">
+            I'm an ambitious IT student with a strong passion for technology and a keen interest in DevOps, software engineering, full-stack development, mobile development, and networking. My journey in tech began with a curiosity to understand how systems work, and since then, I’ve been dedicated to mastering these fields to drive innovation and solve complex problems. 
+          </p>
+          <p class="mb-4">
+            I believe that the integration of development and operations (DevOps), coupled with full-stack expertise, can transform how we build and maintain software. When I’m not coding or studying, I enjoy exploring new networking technologies and building mobile apps to broaden my knowledge. Let’s connect and collaborate on exciting projects that push the boundaries of technology and create value for the world!
+          </p>
+          
+          <a href="#contact" class="btn btn-primary btn-lg mt-3">Contact Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 
   <hr />
   
 
 
-  <section id="skills" class="skills">
-    <h1>My Skills</h1>
-  
-    <!-- Progress bars for each skill -->
-    <div class="mb-3">
-      <label for="html" class="form-label">HTML</label>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
-      </div>
+  <section id="skills" class="skills py-5">
+    <div class="container text-center">
+        <h1 class="mb-4">My Skills</h1>
+
+        <!-- Skill Cards -->
+        <div class="row justify-content-center">
+            <!-- Skill Card 1: HTML -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">HTML</h5>
+                        <div class="progress mb-2">
+                            <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 2: CSS -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">CSS</h5>
+                        <div class="progress mb-2">
+                            <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 3: JavaScript -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">JavaScript</h5>
+                        <div class="progress mb-2">
+                            <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">75%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 4: React -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">React</h5>
+                        <div class="progress mb-2">
+                            <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">80%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 5: Node.js -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">Node.js</h5>
+                        <div class="progress mb-2">
+                            <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">70%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 6: PHP -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">PHP</h5>
+                        <div class="progress mb-2">
+                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">85%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 7: SQL -->
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">SQL</h5>
+                        <div class="progress mb-2">
+                            <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CV Section -->
+        <div class="mt-5">
+            <h3>Download/View My CV</h3>
+            <p>If you'd like to learn more about my experience, feel free to download my CV or view it directly below:</p>
+            <a href="canol-resume.pdf" class="btn btn-primary" download>Download CV</a>
+            <a href="canol-resume.pdf" class="btn btn-secondary ml-2" target="_blank">View CV</a>
+        </div>
     </div>
+</section>
+
   
-    <div class="mb-3">
-      <label for="css" class="form-label">CSS</label>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
-      </div>
-    </div>
-  
-    <div class="mb-3">
-      <label for="javascript" class="form-label">JavaScript</label>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-      </div>
-    </div>
-  
-    <div class="mb-3">
-      <label for="react" class="form-label">React</label>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
-      </div>
-    </div>
-  
-    <div class="mb-3">
-      <label for="nodejs" class="form-label">Node.js</label>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
-      </div>
-    </div>
-  
-    <div class="mb-3">
-      <label for="php" class="form-label">PHP</label>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
-      </div>
-    </div>
-  
-    <div class="mb-3">
-      <label for="sql" class="form-label">SQL</label>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
-      </div>
-    </div>
-  
-  </section>
   
 
     <hr />
 
     <section id="portfolio" class="py-5">
         <div class="container">
-          <h2 class="text-center mb-4">Portfolio</h2>
+          <h2 class="text-center mb-4">My projects</h2>
           
           <div class="row g-4">
 
@@ -184,17 +250,19 @@
       <img src="https://th.bing.com/th/id/OIP.hIIuXw4r966f8aVo4_xpCgHaE6?w=262&h=180&c=7&r=0&o=5&dpr=1.4&pid=1.7" class="card-img-top" alt="Card image 1">
       <div class="card-body">
         <h4 class="card-title">KEJANI RENTALS MANAGEMENT</h4>
-        <p class="card-text">This project is about a rental management plan that helps facilitate the landlord-tenant services.</p>
-        
+        <p class="card-text">This project is a comprehensive rental management system designed to streamline the interaction between landlords and tenants. It enables landlords to efficiently manage property listings, rental agreements, payment tracking, and maintenance requests. Tenants can easily view available properties, make rental payments, and submit service requests. The system also provides tools for generating reports, managing communication, and ensuring a smooth, transparent rental process for both parties.</p>
         <!-- Technologies used in the project as badges -->
         <div style="margin-bottom: 15px;">
           <span class="badge bg-primary">PHP</span>
           <span class="badge bg-secondary">HTML</span>
           <span class="badge bg-success">CSS</span>
+          <span class="badge bg-primary">JS</span>
+          <span class="badge bg-info">SQL</span>
+          <span class="badge bg-danger">LARAVEL</span>
           <!-- Add any other technologies you're using here -->
         </div>
         
-        <a href="view.html" class="btn btn-primary">Read more</a>
+        <a href="kejani.html" class="btn btn-primary">Read more</a>
       </div>
     </div>
   </div>
@@ -205,9 +273,20 @@
                 <div class="card h-100" style="width: 22rem;">
                 <img src="https://th.bing.com/th/id/OIF.9Iln0PDZLzfNfhEX3JcxYA?w=229&h=183&c=7&r=0&o=5&dpr=1.4&pid=1.7" class="card-img-top" alt="Card image 2">
                 <div class="card-body">
-                  <h4 class="card-title">SOMO MOJA</h4>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="view.html" class="btn btn-primary">Read more</a>
+                  <h4 class="card-title">EduManage</h4>
+                  <p class="card-text">A comprehensive school management system designed to streamline administrative tasks and enhance communication between teachers, students, and parents. This application allows teachers to manage student grades, attendance, assignments, and schedules with ease. It also provides tools for communication, reporting, and overall classroom management, making it an essential tool for educators looking to improve their workflow and student engagement.</p>
+
+                   <!-- Technologies used in the project as badges -->
+                <div style="margin-bottom: 15px;">
+                    <span class="badge bg-primary">PHP</span>
+                    <span class="badge bg-secondary">HTML</span>
+                    <span class="badge bg-success">CSS</span>
+                    <span class="badge bg-primary">JS</span>
+                    <span class="badge bg-info">SQL</span>
+                    <span class="badge bg-secondary">GIT</span>
+                    <!-- Add any other technologies you're using here -->
+                </div>
+                  <a href="edumanage.html" class="btn btn-primary">Read more</a>
                 </div>
               </div>
             </div>
@@ -215,11 +294,20 @@
             <!-- Card 3 -->
             <div class="col-md-4">
                 <div class="card h-100" style="width: 22rem;">
-                <img src="public.png" class="card-img-top" alt="Card image 3">
+                <img src="https://ichef.bbci.co.uk/images/ic/1280xn/p03my31g.jpg" class="card-img-top" alt="Card image 2">
                 <div class="card-body">
-                  <h5 class="card-title">Card Title 3</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <h4 class="card-title">EDiary</h4>
+                  <p class="card-text">A user-friendly diary app designed to help individuals keep track of their daily activities, appointments, and thoughts. This application allows users to create, edit, and organize personal entries with ease. It provides features for setting reminders, categorizing entries, and offering privacy options to protect sensitive information. Whether it's for personal reflection, planning, or keeping memories, this system is an essential tool for staying organized and on top of daily tasks.</p>
+ <!-- Technologies used in the project as badges -->
+                <div style="margin-bottom: 15px;">
+                    <span class="badge bg-primary">XML</span>
+                    <span class="badge bg-info">SQLITE</span>
+                    <span class="badge bg-secondary">JAVA</span>
+                    <span class="badge bg-dark">Android Studio</span> <!-- Added Android Studio -->
+                    <!-- Add any other technologies you're using here -->
+                </div>
+
+                  <a href="ediary.html" class="btn btn-primary">Read more</a>
                 </div>
               </div>
             </div>
@@ -231,127 +319,112 @@
       <hr />
       
 
-      <section id="contact" class="contact">
-        <h1>Contact</h1>
+      <section id="contact" class="contact text-center py-5">
+        <h1>Contact Me</h1>
     
         <!-- Contact Icons Section using Bootstrap grid system -->
         <div class="container mt-5">
-            <div class="row">
-                <!-- WhatsApp Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fab fa-whatsapp fa-3x"></i>
-                            <p class="card-text">WhatsApp</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://wa.me/1234567890" class="btn btn-success" target="_blank">Contact</a>
-                        </div>
-                    </div>
+            <div class="row justify-content-center">
+                <!-- WhatsApp Icon -->
+                <div class="col-md-2 mb-4">
+                    <a href="https://wa.me/254790502670" class="btn btn-success" target="_blank">
+                        <i class="fab fa-whatsapp fa-3x"></i>
+                    </a>
+                    <p>WhatsApp</p>
                 </div>
     
-                <!-- Facebook Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fab fa-facebook fa-3x"></i>
-                            <p class="card-text">Facebook</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://facebook.com/Canolowana" class="btn btn-primary" target="_blank">Visit</a>
-                        </div>
-                    </div>
+                <!-- LinkedIn Icon -->
+                <div class="col-md-2 mb-4">
+                    <a href="https://linkedin.com/in/owano-canol" class="btn btn-info" target="_blank">
+                        <i class="fab fa-linkedin fa-3x"></i>
+                    </a>
+                    <p>LinkedIn</p>
                 </div>
     
-                <!-- LinkedIn Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fab fa-linkedin fa-3x"></i>
-                            <p class="card-text">LinkedIn</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://linkedin.com/in/owano-canol" class="btn btn-info" target="_blank">Visit</a>
-                        </div>
-                    </div>
+                <!-- GitHub Icon -->
+                <div class="col-md-2 mb-4">
+                    <a href="https://github.com/Canol001" class="btn btn-dark" target="_blank">
+                        <i class="fab fa-github fa-3x"></i>
+                    </a>
+                    <p>GitHub</p>
                 </div>
             </div>
     
-            <div class="row">
-                <!-- GitHub Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fab fa-github fa-3x"></i>
-                            <p class="card-text">GitHub</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://github.com/Canol001" class="btn btn-dark" target="_blank">Visit</a>
-                        </div>
-                    </div>
+            <div class="row justify-content-center">
+                <!-- Email Icon -->
+                <div class="col-md-2 mb-4">
+                    <a href="mailto:canolowana6@gmail.com" class="btn btn-danger" target="_blank">
+                        <i class="fas fa-envelope fa-3x"></i>
+                    </a>
+                    <p>Email</p>
                 </div>
     
-                <!-- Email Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-envelope fa-3x"></i>
-                            <p class="card-text">Email</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="mailto:canolowana6@gmail.com" class="btn btn-danger" target="_blank">Send Email</a>
-                        </div>
-                    </div>
+                <!-- SMS Icon -->
+                <div class="col-md-2 mb-4">
+                    <a href="sms:+254790502670" class="btn btn-warning" target="_blank">
+                        <i class="fas fa-sms fa-3x"></i>
+                    </a>
+                    <p>SMS</p>
                 </div>
     
-                <!-- SMS Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-sms fa-3x"></i>
-                            <p class="card-text">SMS</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="sms:+254790502670" class="btn btn-warning" target="_blank">Send SMS</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row">
-                <!-- Phone Call Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-phone-alt fa-3x"></i>
-                            <p class="card-text">Phone</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="tel:+254790502670" class="btn btn-primary" target="_blank">Call</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- Discord Card -->
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fab fa-discord fa-3x"></i>
-                            <p class="card-text">Discord</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://discord.com/invite/yourdiscordlink" class="btn btn-secondary" target="_blank">Join</a>
-                        </div>
-                    </div>
+                <!-- Phone Icon -->
+                <div class="col-md-2 mb-4">
+                    <a href="tel:+254790502670" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-phone-alt fa-3x"></i>
+                    </a>
+                    <p>Phone</p>
                 </div>
             </div>
         </div>
     </section>
     
+    
 
-    <footer>
-        <p>&copy; 2024 My Portfolio. All rights reserved.</p>
-    </footer>
+    <!-- Footer Section -->
+<footer class="footer bg-dark text-white py-5">
+    <div class="container">
+      <div class="row">
+        <!-- Column 2: Quick Links -->
+        <div class="col-md-4 mb-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#about" class="text-white">About</a></li>
+            <li><a href="#skills" class="text-white">Skills</a></li>
+            <li><a href="#portfolio" class="text-white">Portfolio</a></li>
+            <li><a href="#contact" class="text-white">Contact</a></li>
+          </ul>
+        </div>
+  
+        <!-- Column 3: Contact & Social -->
+        <div class="col-md-4 mb-4">
+          <h5>Contact & Follow Us</h5>
+          <p>If you have any questions, feel free to reach out to me!</p>
+          
+          <!-- Social Icons -->
+          <div class="social-icons">
+            <a href="https://linkedin.com/in/owano-canol" target="_blank" class="text-white mr-3">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/Canol001" target="_blank" class="text-white mr-3">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:canolowana6@gmail.com" class="text-white mr-3">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="tel:+254790502670" class="text-white mr-3">
+              <i class="fas fa-phone-alt"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer Bottom -->
+      <div class="text-center mt-4">
+        <p>&copy; 2025 OwanoCanol. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="back-to-top-btn">
@@ -401,29 +474,6 @@
         });
     });
 
-
-    // Function to apply the theme based on user's preference
-    function applyTheme() {
-        const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Add 'dark-theme' class to body if the user prefers dark mode
-        if (isDarkTheme) {
-            document.body.classList.add('dark-theme');
-        } else {
-            document.body.classList.remove('dark-theme');
-        }
-    }
-
-    // Apply theme on page load
-    applyTheme();
-
-    // Listen for changes in the user's system theme preference and update the theme
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
-
-    // Optional: Theme toggle button functionality
-    document.getElementById('theme-toggle').addEventListener('click', function() {
-        document.body.classList.toggle('dark-theme');
-    });
 </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
