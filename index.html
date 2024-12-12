@@ -1,7 +1,579 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Responsive Portfolio</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light and Dark Mode Colors */
+        :root {
+            --primary-bg: #ffffff;
+            --primary-text: #000000;
+            --secondary-bg: #f0f0f0;
+            --accent-color: #5bb3f2;
+        }
+
+        [data-theme="dark"] {
+            --primary-bg: #000000;
+            --primary-text: #00ff7f;
+            --secondary-bg: #333333;
+            --accent-color: #00ff7f;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            background: var(--primary-bg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-text);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-text);
+            margin-right: 1px;
+        }
+
+        /* Sidebar Navigation for small screens */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .sidebar.open {
+            transform: scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+
+        .sidebar ul li a {
+            font-size: 2rem;
+            color: var(--primary-text);
+            transition: color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            color: var(--accent-color);
+        }
+
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://th.bing.com/th/id/OIP.KAz8M7ZezYPTGyUkBGJjtAHaE7?w=242&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7') no-repeat center/cover;
+            padding: 20px;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            flex-direction: row; /* Default for larger screens */
+        }
+
+        /* Image */
+        .owner img {
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-color);
+        }
+        
+        /* Hero Text */
+        .hero-text {
+            color: white;
+            text-align: left;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-text .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .hero-text .social-icons a {
+            font-size: 1.5rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+        
+        .hero-text .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column; /* Stack elements vertically */
+                justify-content: flex-start;
+                text-align: center;
+            }
+            
+            .hero-text {
+                margin-top: 20px;
+            }
+
+            .owner img {
+                margin-top: 20px;
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .about, .skills, .portfolio, .contact {
+            min-height: 100vh;
+        }
+        .about{
+            background: var(--secondary-bg);
+        }
+
+        .skills ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .skills ul li {
+            background: var(--secondary-bg);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .portfolio .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .portfolio .projects div {
+            background: var(--secondary-bg);
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio .projects div:hover {
+            transform: translateY(-5px);
+        }
+
+        form input, form textarea, form button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid var(--accent-color);
+            border-radius: 5px;
+            background: var(--secondary-bg);
+            color: var(--primary-text);
+        }
+
+        form button {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--secondary-bg);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .menu-toggle{
+            display: none;
+        }
+
+         /* Responsive Adjustments */
+         @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 2rem;
+                color: var(--primary-text);
+                cursor: pointer;
+            }
+        }
+
+        /* Code Block Styling */
+pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0 auto;
+    max-width: 100%;
+    font-size: 1rem;
+
+}
+
+code {
+    color: #f8f8f2;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .about {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    pre {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    pre {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+}
+.yellow{
+    color: yellow;
+}
+.blue{
+    color: blue;
+}
+.grey{
+    color: grey;
+}
+.green{
+    color: #00ff7f;
+}
+.more-green{
+    color: #00ff1e;
+}
+.red{
+    color: red;
+}
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">OWANA</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <i class="fas fa-sun theme-toggle"></i>
+        <i class="fas fa-bars menu-toggle"></i>
+    </nav>
+
+    <!-- Sidebar for small screens -->
+<div class="sidebar" id="sidebar">
+    <ul>
+        <li><a href="#about" class="menu-item">About</a></li>
+        <li><a href="#skills" class="menu-item">Skills</a></li>
+        <li><a href="#portfolio" class="menu-item">Portfolio</a></li>
+        <li><a href="#contact" class="menu-item">Contact</a></li>
+    </ul>
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="owner">
+            <img src="public.png" alt="Owner's Picture">
+        </div>
+        <div class="hero-text">
+            <h1>Hi, i'm Canol Owana Okoth</h1>
+            <p>I'm a passionate developer creating amazing web experiences.</p>
+            <div class="social-icons">
+                <a href="https://github.com/Canol001" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- About Section -->
+<section id="about" class="about">
+    <h1>About Me</h1>
+    <pre>
+    About />
+    <span class="blue">class </span><span class="yellow">canolOkothOwana </span>{
+    <span class="grey">// I can, because I did.
+        // My vast variety of skills is continuously expanding. </span>
+
+        <span class="blue">constructor </span>() <span class="green">
+            {
+                <span class="red">this</span>.name = 'Canol Owana'
+                <span class="red">this</span>.dayOfBirthTimestamp = 03062004
+                <span class="red">this</span>.email = 'canolowana6@gmail.com'
+            }
+        </span>
+        
+        <span class="yellow">workExperience</span>() {
+            <span class="blue">return </span><span class="more-green">[
+                { '2020-now' : 'Full-stack Developer/Owner at Pixel Lab' },
+                { '2023-now' : 'Solutions Architect at Digitree Group S.A.' },
+                { '2017-2023' : 'Full-stack Developer at Digitree Group S.A.' },
+                { '2013-2017': 'Full-Stack Designer at Digitree Group S.A.' },
+                { '2006-now' : 'Full-Stack Designer/developer at Yasio.dev' }
+            ]</span>
+        }
+
+        <span class="blue">education </span>() {
+            return [
+                { '2012-2014': 'Wyższa Szkoła Biznesu w Dąbrowie Górniczej - Master\'s Degree (mgr), Computer Science (IT)' },
+                { '2008-2012': 'Wyższa Szkoła Technologii Informatycznych w Katowicach - Bachelor of Engineering (inż.), Computer Science (IT)' }
+            ]
+        }
+
+        <span class="blue">skills </span>() {
+            <span class="blue">return </span> 
+            <span class="more-green">
+                [ 'HTML/CSS/JS', 'Vue', 'Node.js', 'Redis/NATS/RabbitMQ', 'Bootstrap/Tailwind', 'Webpack/Gulp/Vite', 'SCSS/Less', 'npm/yarn/pnpm', 'Docker/k8s', 'PWA', 'SSR', 'SPA', 'GIT/CVS', 'Cordova', 'NativeScript', 'Electron', 'Web-extensions', 'Web Sockets', 'Firebase', 'RWD/W3C/ARIA/WCAG', 'XSLT/Smarty/Twig', 'PHP', 'MySQL/MongoDB/ORM', 'Wordpress', 'Photoshop', 'Illustrator', 'After Effects', 'Premiere', 'Motion design', 'UX/UI', 'DTP', 'AWS', 'GCP', 'C#', 'Unity', 'TypeScript', 'NestJS', 'Cypress', 'Jest', 'Nuxt', 'Quasar' ]
+        }
+            </span>
+    }
+    </pre>
+</section>
+
+
+    <section id="skills" class="skills">
+        <h1>My Skills</h1>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>React</li>
+            <li>Node.js</li>
+            <li>PHP</li>
+            <li>SQL</li>
+        </ul>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <h1>Portfolio</h1>
+        <div class="projects">
+            <div>Project 1</div>
+            <div>Project 2</div>
+            <div>Project 3</div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h1>Contact</h1>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        });
+
+        // Back to top button visibility
+        const backToTopBtn = document.getElementById('back-to-top-btn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top functionality
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Sidebar toggle for small screens
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        // Close the sidebar when a menu item is clicked
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            sidebar.classList.remove('open'); // Close the sidebar
+        });
+    });
+    </script>
 </body>
 </html>
